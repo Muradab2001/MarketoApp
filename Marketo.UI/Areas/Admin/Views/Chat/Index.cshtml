@@ -1,0 +1,128 @@
+﻿@inject Marketo.UI.Services.LayoutService layoutService
+@model ChatVM
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CodePen - Material Messaging App Concept</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+    <!-- partial:index.partial.html -->
+        <input  hidden value="@ViewBag.Id"  class="id"/>
+        <div style="width:50rem;" class="">
+            <div class="row">
+            <section class="discussions" style="width:100%">
+                @{
+                    var adminImg = layoutService.getSettings().FirstOrDefault(s => s.Key.Trim().ToLower() == "admin-logo");
+                    var moderatorImg = layoutService.getSettings().FirstOrDefault(s => s.Key.Trim().ToLower() == "moderator-logo");
+                }
+
+                @foreach (AppUser user in Model.AppUsers)
+                {
+                    // Choose the appropriate image based on the user's role
+                    var userImg = user.Admin.HasValue && user.Admin.Value
+                    ? (adminImg ?? new Setting())
+                    : (moderatorImg ?? new Setting());
+
+
+                    // Set the online status color
+                    var onlineStatusColor = user.Active ? "green" : "red";
+
+                    <div class="discussion" data-user-id="@user.Id">
+                        <div class="photo" style="background-image: url(@userImg.Value);">
+                            <div style="background-color: @onlineStatusColor;" class="online"></div>
+                        </div>
+                        <a asp-action="ChatUser" asp-route-Userid="@user.Id" class="desc-contact">
+                            <p class="name">@user.UserName</p>
+                        </a>
+                    </div>
+                }
+            </section>
+                <section style="display:none" class="chat">
+                    <div class="header-chat">
+                        <i class="icon fa fa-user-o" aria-hidden="true"></i>
+                        <p class="name">Megan Leib</p>
+                        <i class="icon clickable fa fa-ellipsis-h right" aria-hidden="true"></i>
+                    </div>
+                    <div class="messages-chat">
+                        <div class="message">
+                            <div class="photo" style="background-image: url(https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80);">
+                                <div class="online"></div>
+                            </div>
+                        </div>
+                        <div class="message text-only">
+                            <p class="text"> What are you doing tonight ? Want to go take a drink ?</p>
+                        </div>
+                      
+                        <div class="message text-only">
+                            <div class="response">
+                                <p class="text"> Hey Megan ! It's been a while 😃</p>
+                            </div>
+                        </div>
+
+
+
+                       
+                     
+                       
+                       
+                    </div>
+                    <div class="footer-chat">
+                        <i class="icon fa fa-smile-o clickable" style="font-size:25pt;" aria-hidden="true"></i>
+                         <input type="text" id="messageInput" placeholder="Type a message..." />
+                        <button onclick="sendMessage()">Send</button> 
+                    </div>
+                </section>
+            </div>
+        </div>
+    </body>
+    <!-- partial -->
+
+</html>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.12/signalr.min.js" integrity="sha512-rQm2bvVuqEjdaJKcVj/+bx+FnccQCHZpBIMQRJkyDACamQ12m6XuFb2aHQYgdTEnnHNIsAMeh1hODKwm2Uvy5A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/chathub")
+        .build();
+        var ID = $('.id').val();
+    connection.on("ReceiveMessage", (user, message, ID) => {
+        console.log(`${user}: ${message}`);
+
+
+        $(document).ready(function () {
+            $('.messages-chat').append(`
+                  <div class="message text-only">
+                                <div class="response">
+                                        <p class="text">${message}</p>
+                                </div>
+                            </div>
+        `);
+        });
+    });
+    connection.on("ConnectUser", (Id) => {
+        $(".discussions .discussion[data-user-id='" + Id + "'] .online").css('background-color', 'green');
+        
+    });
+
+    connection.on("DisconnectUser", (Id) => {
+        $(".discussions .discussion[data-user-id='" + Id + "'] .online").css('background-color', 'red');
+    });
+
+    connection.start().catch(err => console.error(err));
+</script>
+
+<script>
+    function sendMessage() {
+        var message = $("#messageInput").val();
+        connection.invoke("SendMessage", message).catch(err => console.error(err));
+    }
+</script>

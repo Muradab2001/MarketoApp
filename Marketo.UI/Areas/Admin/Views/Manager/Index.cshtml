@@ -1,0 +1,113 @@
+﻿@model List<AppUser>
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="main-panel">
+    <h5 class="d-flex" style="justify-content: center; background-color: #d1e7dd; color: #000; font-size: 20px; padding: 10px;">Manager</h5>
+    <div class="table-responsive">
+        <table class="table table-bordered" style="text-align: center">
+            <thead class="table table-success" style="text-align: center">
+                <tr>
+                    <th>
+                        FirstName
+                    </th>
+                    <th>
+                        LastName
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Manager Role
+                    </th>
+                    <th>
+                        StatusRole
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var appUser in Model)
+                {
+                    <tr>
+                        <td>@appUser.FirstName</td>
+                        <td>@appUser.LastName</td>
+                        <td>@appUser.Email</td>
+                        <td>
+                            @if (appUser.Admin == null)
+                            {
+                                <span>Member</span>
+                            }
+                            else if (appUser.Admin == true)
+                            {
+                                <span>Admin</span>
+                            }
+                            else if (appUser.Admin == false)
+                            {
+                                <span>Moderator</span>
+                            }
+
+                        </td>
+                        <td>
+                            @if (appUser.Admin == null)
+                            {
+                                <a asp-controller="Manager" asp-action="ManagerChange" asp-route-id="@appUser.Id" class="btn btn-outline-success">
+                                    <img class="img-fluid" src="~/admin/images/Customer-48.png"><br />
+                                </a>
+                            }
+                            else if (appUser.Admin == true)
+                            {
+                                <a asp-controller="Manager" asp-action="ManagerChange" asp-route-id="@appUser.Id" class="btn btn-outline-success">
+                                    <img class="img-fluid" src="~/admin/images/Administrator-male-skin-type-7-48.png"> <br/>
+                                </a>
+                            }
+                            else if (appUser.Admin == false)
+                            {
+                                <a asp-controller="Manager" asp-action="ManagerChange" asp-route-id="@appUser.Id" class="btn btn-outline-success">
+                                    <img class="img-fluid" src="~/admin/images/Moderator-48.png"><br />
+                                </a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <nav class="pagination d-flex" style="justify-content: center;">
+            <ul class="page-numbers" style="display: flex; list-style: none; padding-top: 10px;">
+                <li class="page-item @(ViewBag.Currentpage == 1 ? "disabled" : "")" style="width: 55px; cursor: pointer;">
+                    <a class="page-link page-numbers current btnn" style="cursor: pointer;" asp-controller="Manager" asp-action="index" asp-route-page="ViewBag.CurentPage-1">Prev</a>
+                </li>
+                @for (int i = 1; i <= ViewBag.TotalPage; i++)
+                {
+                    <li class="page-item @(ViewBag.CurrentPage == i ? "active" : "")">
+                        @if (i != ViewBag.CurentPage)
+                        {
+                            <a id="myPage" class="page-link page-numbers btnn " asp-controller="Manager" asp-action="index" asp-route-page="@i">@i</a>
+                        }
+                        else
+                        {
+                            <a style="background-color:blue;color:wheat" id="myPage" class="page-link page-numbers btnn" asp-controller="Manager" asp-action="index" asp-route-page="@i">@i</a>
+                        }
+                    </li>
+                }
+                @if (ViewBag.CurentPage < ViewBag.TotalPage)
+                {
+                    <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPage ? "disabled" : "")" style="width: 55px;">
+                        <a class="page-link page-numbers btnn" asp-controller="Manager" asp-action="index" asp-route-page="ViewBag.CurentPage -1">Next</a>
+
+                    </li>
+                }
+
+            </ul>
+        </nav>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+
+}

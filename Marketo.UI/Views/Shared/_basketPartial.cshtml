@@ -1,0 +1,227 @@
+﻿@inject Marketo.UI.Services.LayoutService layoutService;
+@{
+    BasketVM basket = await layoutService.ShowBasket();
+}
+<p id="total_count" style="display:none">@layoutService.ShowBasket().Result.Count</p>
+
+<div class="offcanvas offcanvas-end" style="overflow:auto" tabindex="-1" id="offcanvasRight"
+     aria-labelledby="offcanvasRightLabel">
+    @if (layoutService.ShowBasket().Result.BasketItems.Count == 0)
+    {
+        <div class="offcanvas-header">
+            <h3 class="offcanvas-title" id="offcanvasRightLabel" style="letter-spacing: -0.5px;
+                font-size: 20px;
+                font-weight: 600;">
+                Shopping cart
+            </h3>
+            <button style="color: #000;
+                font-size: 13px;
+                padding-right: 10px;
+                margin-right: 10px;
+                height: 20px;
+                background-color: #ededed;
+                border-radius: 100%;" type="button" class="btn-close closebtn" data-bs-dismiss="offcanvas"
+                    aria-label="Close">
+            </button>
+
+        </div>
+        <hr />
+        <div class="widget_shopping_cart_content">
+            <p class="empty-message" style="text-align:end;">No products in the cart.</p>
+        </div>
+    }
+    else
+    {
+        <div class="offcanvas-header">
+            <h3 style="letter-spacing: -0.5px;
+                font-size: 20px;
+                font-weight: 600;" class="offcanvas-title" id="offcanvasRightLabel">
+                Shopping cart
+            </h3>
+            <button type="button" class="btn-close closebtn" data-bs-dismiss="offcanvas"
+                    aria-label="Close">
+            </button>
+        </div>
+        <hr />
+        @foreach (var item in layoutService.ShowBasket().Result.BasketItems)
+        {
+            <div class="offcanvas-body" style="overflow: visible;">
+                <div class="canvas-box" style="height: 100%;
+			        padding-right: 30px;
+			        margin-right: -15px;">
+                    <div class="canvas-item" ;
+                         max-height: 350px;">
+                        <ul class="custom-ul">
+                            <li class="custom-li" style="display: flex;
+					            flex-wrap: wrap;
+					            margin-left: -32px;">
+                                <div class="canvas-image" style="flex-basis: 85px;
+						            width: 85px;
+						            height: 91px;">
+                                    <a asp-controller="furniture" asp-action="detail" asp-route-id="@item.Furniture.Id" style="text-decoration: none;">
+                                        <img style="max-width: 100%;" src="~/assets/image/shop/@item.Furniture.Image" alt="">
+                                    </a>
+                                </div>
+
+                                <div class="canvas-img-title" style="padding: 0 10px;
+						            max-width: calc(100% - 115px);
+						            flex-basis: calc(100% - 115px);">
+                                    <h3 class="pro-text" style="font-size: 14px;
+							        font-weight: 400;
+							        line-height: 1;
+							        letter-spacing: 1px;
+							        padding-bottom: 10px;
+							        color: #333;
+							        text-transform: capitalize;">
+                                        <a class="text"
+                                           href="product-details.html" style="text-decoration: none;
+								            color: #0063d1;
+								            font-weight: 500;
+								            font-size: 15px;
+								            display: flex;
+								            line-height: 1.5;">@item.Furniture.Name</a>
+                                    </h3>
+                                    <p class="card-pro" style="display: flex;
+							        justify-content: end;
+							        background-color: transparent;">
+                                        <span style="font-size: 12px;
+								        color: #666666;
+								        line-height: 1;
+								        top: 120px;
+								        left: 120px;
+								        background-color: transparent;
+								        display: flex;
+								        font-weight: 800;
+								        gap: 2px;" class="card-quantity">
+                                            @item.Quantity <b style="font-size: 16px;
+									vertical-align: text-bottom;">×</b>
+                                        </span>
+                                        <span style="color: #f07f13;
+								        font-size: 14px;
+								        font-weight: 600;
+								        line-height: 1;
+								        top: 119px;
+								        background-color: transparent;
+								        left: 100px;
+								        padding-left: 4px" class="card-price2">$@(item.Furniture.Price * item.Quantity)</span>
+                                    </p>
+                                </div>
+
+                                <a  data-id="@item.Furniture.Id" class="btn-xmark remove"
+                                   style="background-color: #fff;
+						            cursor: pointer;
+						            flex-basis: 30px;
+						            text-align: center;
+						            color: #ff0000;
+                                    border-radius:100%;
+                                    text-decoration:none;
+						            font-weight: 800;">
+                                    <span> X</span>
+                                </a>
+
+                            </li>
+
+                            <hr />
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        }
+        <div class="canvas-price-box" style="padding-bottom: 0px;
+				        padding-top: 0px;
+				        display: flex;
+				        justify-content: right;
+				        gap: 5px;">
+            <ul>
+                <li style="display: flex;
+					            justify-content: flex-end;
+					            margin-bottom: 5px;
+					            margin-left: 15px;
+					            line-height: 0;
+					            gap: 10px;">
+                    <span style="font-weight: 600;" class="sub-total">Subtotal:</span>
+
+                    <span style="font-size: 16px;
+						            color: #333333;
+						            text-transform: capitalize;
+						            left: 30px;
+						            top: 300px;
+						            font-weight: 600;" class="sub-total">
+                        <b style="color: #f08319; padding-right: 20px;
+							font-weight: 600;">$@basket.TotalPrice.ToString("f2")</b>
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <div class="minicart-button" style="display: flex;
+				        justify-content: right;
+				        gap: 15px;">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a style="color: #fff;
+					            font-size: 13px;
+                                width: 40%;
+					            display: block;
+					            font-weight: 600;
+					            padding: 14px 29px;
+					            background-color: #F07F13;
+					            text-transform: capitalize;
+					            border-radius: 40px;
+					            text-align: center;
+					            margin-bottom: 10px;
+					            text-decoration: none;" asp-controller="cart" asp-action="index" asp-route-id="">
+                    view cart
+                </a>
+                <a asp-controller="order" asp-action="checkout" style="color: #fff;
+					            font-size: 13px;
+                                width: 40%;
+					            display: block;
+					            font-weight: 600;
+					            line-height: 1;
+					            padding: 14px 29px;
+					            background-color: #F07F13;
+					            text-transform: capitalize;
+					            border-radius: 40px;
+					            text-align: center;
+					            margin-bottom: 10px;
+					            text-decoration: none;">
+                    checkout
+                </a>
+            }
+            else
+            {
+                <a style="color: #fff;
+					            font-size: 13px;
+                                width: 40%;
+					            display: block;
+					            font-weight: 600;
+					            line-height: 1;
+					            padding: 14px 29px;
+					            background-color: #F07F13;
+					            text-transform: capitalize;
+					            border-radius: 40px;
+					            text-align: center;
+					            margin-bottom: 10px;
+					            text-decoration: none;" asp-controller="cart" asp-action="index" asp-route-id="">view cart</a>
+                <a style="color: #fff;
+					            font-size: 13px;
+                                width: 40%;
+					            display: block;
+					            font-weight: 600;
+					            line-height: 1;
+					            padding: 14px 29px;
+					            background-color: #F07F13;
+					            text-transform: capitalize;
+					            border-radius: 40px;
+					            text-align: center;
+					            margin-bottom: 10px;
+					            text-decoration: none;"
+                   asp-controller="order" asp-action="checkout">
+                    checkout
+                </a>
+            }
+        </div>
+    }
+
+</div>

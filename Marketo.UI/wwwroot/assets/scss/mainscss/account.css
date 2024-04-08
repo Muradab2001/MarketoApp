@@ -1,0 +1,85 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  font-family: "Rubik", sans-serif;
+}
+
+body {
+  max-width: 100%;
+}
+
+.reset_password {
+  margin-top: 30px;
+  padding: 1em 2em 1em 3.5em;
+  font-weight: 600;
+  opacity: 0.9;
+}
+.reset_password p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+.reset_password .form-row {
+  padding: 3px;
+  margin: 0 0 6px;
+  width: 47%;
+  overflow: visible;
+}
+.reset_password .form-row label {
+  display: block;
+  width: 100%;
+  line-height: 2;
+}
+.reset_password .form-row .input-text {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  outline: 0;
+  line-height: normal;
+  border: 1px solid #e3e3e3;
+  border-radius: 0;
+  background-color: #fff;
+  padding: 0 8px;
+  font-size: 1em !important;
+  display: block;
+  width: 100%;
+  height: 45px;
+}
+.reset_password .clear {
+  clear: both;
+}
+.reset_password .form-row {
+  padding: 3px;
+  margin: 0 0 6px;
+}
+.reset_password .form-row input {
+  outline: 0;
+}
+.reset_password .form-row .recent-button {
+  background-color: #f07f13;
+  color: #fff;
+  padding: 16px 32px !important;
+  font-size: 100%;
+  margin: 0;
+  line-height: 1;
+  cursor: pointer;
+  position: relative;
+  text-decoration: none;
+  overflow: visible;
+  padding: 0.618em 1em;
+  font-weight: 700;
+  border-radius: 3px;
+  left: auto;
+  border: 0;
+  display: inline-block;
+  background-image: none;
+  box-shadow: none;
+  text-shadow: none;
+}
+.reset_password .form-row .recent-button:hover {
+  color: #fff;
+  background-color: #83b735;
+  transition: 0.3s linear;
+}/*# sourceMappingURL=account.css.map */

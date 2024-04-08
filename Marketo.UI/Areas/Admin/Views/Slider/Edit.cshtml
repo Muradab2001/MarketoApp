@@ -1,0 +1,50 @@
+﻿@model Slider
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<main class="main-panel">
+    <h1 style="text-align:center; text-align: center; background-color:chartreuse">Slider Edit</h1>
+    <div class="my-2">
+        <img style="width: 20rem" src="~/assets/image/slider/@Model.Image" />
+    </div>
+    <form method="post" class="mt-2" enctype="multipart/form-data">
+        <div>
+            <label>Image:</label><br />
+            <input asp-for="Photo" class="form-control" /><br />
+            <span classs="text-danger" asp-validation-for="Photo"></span>
+        </div>
+        <div>
+            <label>Title:</label><br />
+            <input asp-for="Title" type="text" class="form-control" /><br />
+            <span class="text-danger" asp-validation-for="Title"></span>
+        </div>
+        <div>
+            <label>Desc:</label><br />
+            <input asp-for="Desc" type="text" class="form-control" /><br />
+            <span class="text-danger" asp-validation-for="Desc"></span>
+        </div>
+        <div>
+            <label>Discount:</label><br />
+            <input asp-for="Discount" type="text" class="form-control" /><br />
+            <span class="text-danger" asp-validation-for="Discount"></span>
+        </div>
+        <div>
+            <label>Button:</label><br />
+            <input asp-for="ButtonUrl" type="text" class="form-control" /><br />
+            <span class="text-danger" asp-validation-for="ButtonUrl"></span>
+        </div>
+        <div>
+            <label>Order:</label><br />
+            <select class="form-control" asp-for="OrderItemNumberId"
+                    asp-items="@(new SelectList(ViewBag.Description,"Id","Number"))"></select>
+        </div>
+        <div class="mt-2">
+            <button class="btn btn-success" type="submit">
+                Update
+            </button>
+        </div>
+    </form>
+</main>
+
+

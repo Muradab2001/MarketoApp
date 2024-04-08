@@ -1,0 +1,106 @@
+﻿@inject Marketo.UI.Services.LayoutService layoutService
+
+@{
+    ViewData["Title"] = "Index";
+
+    WishlistVM wishlist =await layoutService.GetWishlist();
+}
+
+@{
+    string name = null;
+
+    if (TempData.ContainsKey("name"))
+        name = TempData["name"].ToString();
+}
+<h5 id="succses" style="color:#fff; background-color: #2b7800; text-align: center;">
+    @name
+</h5>
+
+    <!-- Main start -->
+
+    <main>
+        <section>
+            <div class="about">
+                <div class="container">
+                    <div class="row g-4">
+                        <div class="col-sm-12 g-4">
+                            <div class="about-title">
+                                <span>
+                                    <a asp-controller="Home" asp-action="Index">Home </a>
+                                </span>
+                                >
+                                <span> Wishlist</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="wishlist">
+            <div class="container">
+            <div class="row d-md-block wish-lists">
+                <div class="col-lg-12 col-sm-6 ">
+                       @* <h2">My wishlist on MarketPress</h2>*@
+                        <div class="title-form">
+                            <input type="text" value="My wishlist on MarketPress" name="wishlist_name">
+                            <!-- <div class="edit-title-buttons">
+                                <a role="button" href="#" class="hide-title-form">
+                                    <i class="fa fa-remove"></i> 
+                                </a>
+                                <a role="button" href="#" class="save-title-form">
+                                    <i class="fa fa-check"></i> 
+                                </a>
+                            </div> -->
+                        </div>
+                        <table class="shop_table cart responsive table-bordered" data-pagination="no" data-per-page="5"
+                            data-page="1" data-id="10389">
+                            <thead>
+                                <tr>
+                                    <th class="product-remove">
+                                        <span class="nobr">
+                                        </span>
+                                    </th>
+                                    <th class="product-thumbnail"></th>
+                                    <th class="product-name">
+                                        <span class="nobr">
+                                            Product name
+                                        </span>
+                                    </th>
+                                    <th class="product-price">
+                                        <span class="nobr">
+                                            Unit price
+                                        </span>
+                                    </th>
+                                    <th class="product-stock-status">
+                                        <span class="nobr">
+                                            Stock status
+                                        </span>
+                                    </th>
+                                    <th class="product-add-to-cart">
+                                        <span class="nobr">
+                                        </span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <div class="wishContainer"> 
+                                <div class="wishinROw"> 
+                                    @await Html.PartialAsync("_WishlistPartialView",layoutService)
+                                </div>
+                            </div>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- main end -->
+<script>
+    var succses = document.getElementById("succses");
+    console.log(succses);
+    const myTimeout = setTimeout(myGreeting, 5000);
+    function myGreeting() {
+        document.getElementById("succses").style.display = "none";
+    }
+</script>

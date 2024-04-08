@@ -1,0 +1,104 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: Roboto;
+    font-family: Arial, Helvetica, sans-serif; 
+}
+.touch{
+    padding: 0 0 60px 0;
+    .t-title{
+        margin-bottom: 20px;
+        margin: 10px 0 40px 0;
+        .heading-title{
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 0;
+            color: #1c1c24;
+        }
+    }
+    .form-title{
+        margin-bottom: 20px;
+        padding: 10px;
+        .form-content{
+            position: relative;
+            z-index: 0;
+            overflow-x: clip;
+            background-color: #fff;
+            .input-wrapper{
+                .input-label{
+                    display: block;
+                    color: #222;
+                    font-size: 1em;
+                    font-weight: 500;
+                    line-height: 4em;
+                }
+                .inp-input{
+                    width: 100%;
+                    max-width: 100%;
+                    background-color: #FFF;
+                    border-style: solid;
+                    border-width: 1px 1px 1px 1px;
+                    border-color: #CCDCFE;
+                    color: #222;
+                    padding: 15px 19px 15px 19px;
+                    border-radius: 0;
+                    outline: none;
+                }
+                .subject-input{
+                    width: 100%;
+                    max-width: 100%;
+                    background-color: #FFF;
+                    border-style: solid;
+                    border-width: 1px 1px 1px 1px;
+                    border-color: #CCDCFE;
+                    color: #222;
+                    outline: none;
+                    padding: 50px 19px 50px 19px;
+                    margin: 0 0 0 0;
+                    border-radius: 0;
+                }
+            }
+        }
+    }
+    .elementor-widget{
+        margin: 21px 0 0 0;
+        .btn-wraper{
+            text-align: left;
+            .metform-btn{
+                padding: 13px 35px 13px 35px;
+                font-size: 12px;
+                font-weight: 500;
+                letter-spacing: 0.1px;
+                color: #fff;
+                background-color: #0063D1;
+                border-style: none;
+                border-radius: 36px 36px 36px 36px;
+                border: none;
+                box-shadow: none;
+                display: inline-block;
+                max-width: 100%;
+                cursor: pointer;
+                line-height: 18px;
+                transition: all .4s;
+            }
+        }
+    }
+}
+.responsive-map{
+    overflow: hidden;
+    margin-top: 30px;
+    margin-bottom: 100px;
+    padding-bottom:56.25%;
+    position:relative;
+    height:0;
+    iframe{
+        left:0;
+        top:0;
+        height:100%;
+        width:100%;
+        position:absolute;
+        }
+    }

@@ -1,0 +1,42 @@
+﻿@model Slider
+@{
+    ViewData["Title"] = "Create";
+}
+
+<main class="main-panel">
+    <h1 style="text-align:center; background-color:palegreen">Create Slider</h1>
+    <form method="post" class="mt-2" enctype="multipart/form-data">
+        <div>
+            <label>Image:</label><br />
+            <input asp-for="Photo" class="form-control" /><br />
+            <span classs="text-danger" asp-validation-for="Photo"></span>
+        </div>
+        <div>
+            <label>Title:</label><br />
+            <input asp-for="Title" type="text" class="form-control" /><br />
+            <span class="text-danger" asp-validation-for="Title"></span>
+        </div>
+        <div>
+            <label>Desc:</label><br />
+            <input asp-for="Desc" type="text" class="form-control" /><br />
+            <span class="text-danger" asp-validation-for="Desc"></span>
+        </div>
+        <div>
+            <label>Discount:</label><br />
+            <input asp-for="Discount" type="text" class="form-control" /><br />
+            <span class="text-danger" asp-validation-for="Discount"></span>
+        </div>
+        <div>
+            <label>Button:</label><br />
+            <input asp-for="ButtonUrl" type="text" class="form-control" /><br />
+            <span class="text-danger" asp-validation-for="ButtonUrl"></span>
+        </div>
+        <select class="form-control" asp-for="OrderItemNumberId"
+                asp-items="@(new SelectList(ViewBag.Description,"Id","Number"))"></select>
+        <div class="mt-2">
+            <button class="btn btn-success" type="submit">
+                Create
+            </button>
+        </div>
+    </form>
+</main>

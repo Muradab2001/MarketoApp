@@ -1,0 +1,48 @@
+﻿@foreach (Furniture furniture in Model)
+{
+    <div class="col-lg-3 col-12 col-md-4 col-sm-6">
+        <a asp-controller="Furniture" asp-action="Detail" asp-route-id="@furniture.Id">
+            <div class="product-m">
+                <div class="thumb">
+                    <a class="aspect aspect--bg-grey aspect--square u-d-block"
+                       asp-controller="Furniture" asp-action="Detail" asp-route-id="@furniture.Id">
+                        <img width="222" height="300" class="aspect__img"
+                             src="~/assets/image/shop/@furniture.Image" alt="">
+                    </a>
+                    <div class="add-cart d-flex btn--e-brand" data-bs-target="#quickModal" id="quickModal">
+                        @if (furniture.Stock == true)
+                        {
+                            <a asp-controller="Cart" asp-action="AddBasket" asp-route-id="@furniture.Id" style="padding: 15px 24px;" class="btn--e-brand d-flex addToCart" data-modal="modal" data-modal-id="#add-to-cart">
+                                <i class="fa-solid fa-basket-shopping"></i>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="" style="padding: 15px 24px;" class="btn--e-brand d-flex addToCart" data-modal="modal" data-modal-id="#add-to-cart">
+                                <i class="fa-solid fa-basket-shopping"></i>
+                            </a>
+                        }
+                       
+                        <a asp-controller="wishlist" asp-action="AddWishlist" class="btn--e-brand d-flex wishlistFetch" asp-route-id="@furniture.Id" data-modal="modal"
+                           data-modal-id="#add-to-cart">
+                            <i class="fa-regular fa-heart"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="name">
+                        <a href="product-detail.html">@furniture.Name</a>
+                    </div>
+                    <div class="price">$@furniture.Price</div>
+                    <div class="hover">
+                        <div class="preview-description">
+                            <span>
+                                @furniture.Article
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+}

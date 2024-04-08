@@ -1,0 +1,25 @@
+﻿@model Faq
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<main class="main-panel">
+    <h1 style="text-align:center; background-color:chartreuse">Edit Frequently asked questions</h1>
+    <form method="post" class="mt-2" enctype="multipart/form-data">
+        <div>
+            <label>Title:</label><br />
+            <input asp-for="Title" type="text" class="form-control" /><br />
+            <span class="text-danger" asp-validation-for="Title"></span>
+        </div>
+        <div>
+            <label>Desc:</label><br />
+            <input asp-for="Desc" type="text" class="form-control" /><br />
+            <span class="text-danger" asp-validation-for="Desc"></span>
+        </div>
+        <div class="mt-2" style="text-align: center;">
+            <button class="btn btn-success" type="submit">
+                Update
+            </button>
+        </div>
+    </form>
+</main>

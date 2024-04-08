@@ -1,0 +1,63 @@
+﻿@model List<About>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="main-panel">
+    <h5 class="d-flex" style="justify-content: center; background-color: #d1e7dd; color: #000; font-size: 20px; padding: 10px;">About</h5>
+    <div class="table-responsive">
+        <table class="table table-bordered" style="text-align: center; padding-top: 0px !important;">
+            <thead class="table table-success" style="text-align: center">
+                <tr>
+                    <th>
+                        Image
+                    </th>
+                    <th>
+                        SubTitle
+                    </th>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        Desc
+                    </th>
+                    <th>
+                        Order
+                    </th>
+                    <th>
+                        Edit
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (About about in Model)
+                {
+                    <tr class="table-light">
+                        <td>
+                            <img style="width:110px; height:110px"
+                             src="~/assets/image/@about.Image" />
+                        </td>
+                        <td>
+                            @about.SubTitle
+                        </td>
+                        <td>
+                            @about.Title
+                        </td>
+                        <td>
+                            @about.Desc
+                        </td>
+                        <td>
+                            @about.Order
+                        </td>
+                        <td class="d-flex align-items-center" style="height:160px; justify-content: center; gap: 5px">
+                            <div>
+                                <a asp-area="Admin" asp-controller="About" asp-action="Edit" asp-route-id="@about.Id"
+                               class="btn btn-outline-success"><i class="mdi mdi-border-color"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

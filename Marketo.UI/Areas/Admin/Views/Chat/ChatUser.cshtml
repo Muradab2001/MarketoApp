@@ -1,0 +1,180 @@
+﻿@model ChatVM
+@inject Marketo.UI.Services.LayoutService layoutService
+
+@{
+    string username = @ViewBag.User.UserName;
+
+    string Login = @User.Identity.Name;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CodePen - Material Messaging App Concept</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+    <!-- partial:index.partial.html -->
+    <body>
+        <input hidden value="@ViewBag.User.Id" class="id" />
+        <div style="width: 50rem;" class="">
+            <div class="row">
+
+
+                <section class="discussions" style="width:30%;">
+                    <div class="discussion search">
+                    </div>
+
+
+                    @{
+                        // Query settings outside the loop to avoid repeated queries
+                        var adminImg = layoutService.getSettings().FirstOrDefault(s => s.Key.Trim().ToLower() == "admin-logo");
+                        var moderatorImg = layoutService.getSettings().FirstOrDefault(s => s.Key.Trim().ToLower() == "moderator-logo");
+                    }
+
+                    @foreach (AppUser user in Model.AppUsers)
+                    {
+                        // Choose the appropriate image based on the user's role
+                        var userImg = user.Admin.HasValue && user.Admin.Value
+                        ? (adminImg ?? new Setting())
+                        : (moderatorImg ?? new Setting());
+
+
+                        // Set the online status color
+                        var onlineStatusColor = user.Active ? "green" : "red";
+
+                        <div class="discussion" data-user-id="@user.Id">
+                            <div class="photo" style="background-image: url(@userImg.Value);">
+                                <div style="background-color: @onlineStatusColor;" class="online"></div>
+                            </div>
+                            <a asp-action="ChatUser" asp-route-Userid="@user.Id" class="desc-contact">
+                                <p class="name">@user.UserName</p>
+                            </a>
+                        </div>
+                    }
+                </section>
+                <section class="chat">
+                    <div class="header-chat">
+                        <i class="icon fa fa-user-o" aria-hidden="true"></i>
+                        <p class="name">@username</p>
+                        <i class="icon clickable fa fa-ellipsis-h right" aria-hidden="true"></i>
+                    </div>
+                    <div class="messages-chat">
+                        @foreach (var item in Model.Messages.OrderBy(m=>m.CreateTime))
+                        {
+                            @if (item.AppUser.UserName == User.Identity.Name)
+                            {
+                            <div class="message text-only">
+                                <div class="response">
+                                    <p class="text">@item.Text</p>
+                                </div>
+                                </div>
+
+                            }
+                            else
+                            {
+                                <div class="message text-only">
+                                    <p class="text"> @item.Text</p>
+                                </div>
+                            }
+                        }
+                    </div>
+                    <div class="footer-chat">
+                        <i class="icon fa fa-smile-o clickable" style="font-size:25pt;" aria-hidden="true"></i>
+                     
+                        <input type="text" id="messageInput" class="write-message" placeholder="Type your message here">
+                        <button class="btn btn-primary" onclick="sendMessage()">Send</button>
+                       
+                    </div>
+                </section>
+            </div>
+        </div>
+        <audio class="audio"  src="/admin/js/notifications-sound-127856.mp3"></audio>
+    </body>
+    <!-- partial -->
+
+</body>
+</html>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.12/signalr.min.js" integrity="sha512-rQm2bvVuqEjdaJKcVj/+bx+FnccQCHZpBIMQRJkyDACamQ12m6XuFb2aHQYgdTEnnHNIsAMeh1hODKwm2Uvy5A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/chathub")
+        .build();
+
+    var ID = $('.id').val();
+    var UserNamee = "@username";
+    var login = "@Login";
+    var audio = $('.audio')[0];
+
+    connection.on("ReceiveMessage", (message, user,SendUserName) => {
+
+        if (UserNamee === user && login == SendUserName) {
+            $('.messages-chat').append(`
+                <div class="message text-only">
+                    <p class="text">${message}</p>
+                </div>
+            `);
+          
+            if (audio && typeof audio.play === 'function') {
+                audio.play();
+            }
+       
+        }
+    });
+
+    // Rest of your existing code...
+
+    connection.on("ConnectUser", (Id) => {
+        $(".discussions .discussion[data-user-id='" + Id + "'] .online").css('background-color', 'green');
+    });
+
+    connection.on("DisconnectUser", (Id) => {
+        $(".discussions .discussion[data-user-id='" + Id + "'] .online").css('background-color', 'red');
+    });
+    connection.start().catch(err => console.error(err));
+</script>
+
+<script>
+    function sendMessage() {
+        // Get the message from the input field
+        var message = $("#messageInput").val();
+
+        // Check if the message is not null or empty
+        if (message && message.trim() !== "") {
+            // Invoke the "SendMessage" method on the server using SignalR
+            connection.invoke("SendMessage", message, ID).catch(err => console.error(err));
+
+            // Clear the message input field
+            $("#messageInput").val("");
+
+            // Append the sent message to the chat UI
+            $('.messages-chat').append(`
+                <div class="message text-only">
+                    <div class="response">
+                        <p class="text">${message}</p>
+                    </div>
+                </div>
+            `);
+
+            // Scroll to the bottom of the chat
+            var chatDiv = $('.messages-chat');
+            chatDiv.scrollTop(chatDiv[0].scrollHeight);
+        }
+        else {
+-
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'They say it s empty!',
+                });
+            
+        }
+    }
+</script>

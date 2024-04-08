@@ -1,0 +1,43 @@
+﻿@model List<Faq>
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="main-panel">
+    <h5 class="d-flex" style="justify-content: center; background-color: #d1e7dd; color: #000; font-size: 20px; padding: 10px;">Faq</h5>
+    <div class="table-responsive">
+        <table class="table table-bordered" style="text-align: center;">
+            <thead class="table table-success" style="text-align: center">
+                <tr>
+                    <th>
+                        Frequently asked questions
+                    </th>
+                    <th>
+                        Answers
+                    </th>
+                    <th>
+                        Edit
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Faq faq in Model)
+                {
+                    <tr class="table-light">
+                        <td>
+                            @faq.Title
+                        </td>
+                        <td>
+                            @faq.Desc
+                        </td>
+                        <td class="d-flex align-items-center" style="height:160px; justify-content: center; gap: 5px">
+                            <div>
+                                <a asp-area="Admin" asp-controller="Faq" asp-action="Edit" asp-route-id="@faq.Id"
+                                   class="btn btn-outline-success"><i class="mdi mdi-border-color"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

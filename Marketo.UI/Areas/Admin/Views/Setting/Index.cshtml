@@ -1,0 +1,84 @@
+﻿@*@inject FianlProject.Services.LayoutService layoutService*@
+@model List<Setting>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<main class="main-panel " style="background-color: #6222; display: flex; border-spacing">
+    <h5 class="d-flex" style="justify-content: center; background-color: #cdcdcd; color: #000; font-size: 20px; padding: 10px;">Setting Edit</h5>
+    @foreach (var setting in Model)
+    {
+        if (setting.Key.ToLower().Trim() == "logo")
+        {
+            <div style="display: flex; justify-content: space-between; padding: 1rem 1rem; border-bottom: 1px solid black;">
+                <div style="padding: 1rem"><img style="width: 20rem" src="~/assets/image/logo/@setting.Value" /></div>
+                <div>
+                    <a style="border-radius: 5px;" asp-area="Admin" asp-controller="setting" asp-action="Edit" asp-route-id="@setting.Id"
+                       class="btn btn-outline-success mt-3"><i class="mdi mdi-border-color"></i></a>
+                </div>
+            </div>
+        }
+        if (setting.Key.ToLower().Trim() == "footer-logo")
+        {
+            <div style="display: flex; justify-content: space-between; padding: 1rem 1rem; border-bottom: 1px solid black;">
+                <div style="padding: 1rem"><img style="width: 20rem" src="~/assets/image/@setting.Value" /></div>
+                <div>
+                    <a style="border-radius: 5px;" asp-area="Admin" asp-controller="setting" asp-action="Edit" asp-route-id="@setting.Id"
+                       class="btn btn-outline-success mt-3"><i class="mdi mdi-border-color"></i></a>
+                </div>
+            </div>
+        }
+        if (setting.Key.ToLower().Trim() == "footer-logo2")
+        {
+            <div style="display: flex; justify-content: space-between; padding: 1rem 1rem; border-bottom: 1px solid black;">
+                <div style="padding: 1rem"><img style="width: 20rem" src="~/assets/image/@setting.Value" /></div>
+                <div>
+                    <a style="border-radius: 5px;" asp-area="Admin" asp-controller="setting" asp-action="Edit" asp-route-id="@setting.Id"
+                       class="btn btn-outline-success mt-3"><i class="mdi mdi-border-color"></i></a>
+                </div>
+            </div>
+        }
+        if (setting.Key.ToLower().Trim() == "phonenumber")
+        {
+            <div style="display: flex; justify-content: space-between; padding: 1rem 1rem; border-bottom: 1px solid black;">
+                <h1 style="padding: 1rem">
+                    @setting.Value
+                </h1>
+                <div>
+                    <a style="border-radius: 5px;" asp-area="Admin" asp-controller="setting" asp-action="Edit" asp-route-id="@setting.Id"
+                       class="btn btn-outline-success mt-3"><i class="mdi mdi-border-color"></i></a>
+                </div>
+            </div>
+        }
+        if (setting.Key.ToLower().Trim() == "admin-logo")
+        {
+            <div style="display: flex; justify-content: space-between; padding: 1rem 1rem; border-bottom: 1px solid black;">
+                <div style="padding: 1rem"><img style="width: 20rem" src="@setting.Value" /></div>
+                <div>
+                    <a style="border-radius: 5px;" asp-area="Admin" asp-controller="setting" asp-action="Edit" asp-route-id="@setting.Id"
+                       class="btn btn-outline-success mt-3"><i class="mdi mdi-border-color"></i></a>
+                </div>
+            </div>
+        }
+        if (setting.Key.ToLower().Trim() == "moderator-logo")
+        {
+            <div style="display: flex; justify-content: space-between; padding: 1rem 1rem; border-bottom: 1px solid black;">
+                <div style="padding: 1rem"><img style="width: 20rem" src="@setting.Value" /></div>
+                <div>
+                    <a style="border-radius: 5px;" asp-area="Admin" asp-controller="setting" asp-action="Edit" asp-route-id="@setting.Id"
+                       class="btn btn-outline-success mt-3"><i class="mdi mdi-border-color"></i></a>
+                </div>
+            </div>
+        }
+        if (setting.Key.ToLower().Trim() == "advertising")
+        {
+            <div style="display: flex; justify-content: space-between; padding: 1rem 1rem; border-bottom: 1px solid black;">
+                <div style="padding: 1rem"><img style="width: 20rem" src="~/assets/image/shop/@setting.Value" /></div>
+                <div>
+                    <a style="border-radius: 5px;" asp-area="Admin" asp-controller="setting" asp-action="Edit" asp-route-id="@setting.Id"
+                       class="btn btn-outline-success mt-3"><i class="mdi mdi-border-color"></i></a>
+                </div>
+            </div>
+        }
+    }
+</main>

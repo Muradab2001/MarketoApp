@@ -1,0 +1,64 @@
+﻿@model Furniture
+@{
+    ViewData["Title"] = "Create";
+}
+
+<main class="main-panel">
+    <h1 style="text-align:center; background-color:#71c016; color: #fff;">Create Furniture</h1>
+    <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+    <form method="post" class="mt-2" enctype="multipart/form-data">
+        <div>
+            <label>Main:</label><br />
+            <input asp-for="MainPhoto" class="form-control" /><br />
+            <span classs="text-danger" asp-validation-for="MainPhoto"></span>
+        </div>
+        <div>
+            <label>Images:</label><br />
+            <input asp-for="Photos" class="form-control" /><br />
+            <span classs="text-danger" asp-validation-for="Photos"></span>
+        </div>
+        <div>
+            <label>Name:</label><br />
+            <input asp-for="Name" type="text" class="form-control" /><br />
+            <span class="text-danger" asp-validation-for="Name"></span>
+        </div>
+        <div>
+            <label>Price:</label><br />
+            <input asp-for="Price" type="text" class="form-control" /><br />
+            <span class="text-danger" asp-validation-for="Price"></span>
+        </div>
+        <div>
+            <label>SKU:</label><br />
+            <input asp-for="SKU" type="Stock" class="form-control" /><br />
+            <span class="text-danger" asp-validation-for="SKU"></span>
+        </div>
+        <div>
+            <label>Article:</label><br />
+            <input asp-for="Article" type="text" class="form-control" /><br />
+            <span class="text-danger" asp-validation-for="Article"></span>
+        </div>
+        <div class="d-flex g-5" style="gap: 10px;cursor: pointer;">
+            <label>Stock:</label><br />
+            <input style="cursor: pointer;" asp-for="Stock" type="checkbox" /><br />
+            <span class="text-danger m-2 g-3" asp-validation-for="Stock"></span><br />
+        </div>
+        <br />
+        <div>
+            <label>Furniture Description:</label><br />
+            <span class="text-danger" asp-validation-for="FurnitureDescriptionId"></span>
+            <select class="form-control" asp-for="FurnitureDescriptionId"
+                    asp-items="@(new SelectList(ViewBag.Description,"Id","Image"))"></select>
+        </div>
+        <div enctype="multipart/form-data">
+            <label>Furniture Category:</label><br />
+            <select class="form-control" asp-for="CategoryId"
+                    asp-items="@(new SelectList(ViewBag.Categories,"Id","Name"))"></select>
+        </div>
+        <div class="mt-2">
+            <button class="btn btn-success" type="submit">
+                Create
+            </button>
+        </div>
+    </form>
+</main>
+

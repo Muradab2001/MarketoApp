@@ -1,0 +1,224 @@
+﻿@model Contact
+@inject Marketo.UI.Services.LayoutService layoutService
+@{
+    ViewData["Title"] = "Index";
+}
+
+@{
+    string name = null;
+
+    if (TempData.ContainsKey("name"))
+        name = TempData["name"].ToString();
+}
+<h5 id="succses" style="color:#fff; background-color: #2b7800; text-align: center;">
+    @name
+</h5>
+  <!-- Main Start -->
+    <section>
+        <div class="about">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-sm-12 g-4">
+                        <div class="about-title">
+                            <span>
+                                <a asp-controller="Home" asp-action="Index">Home </a>
+                            </span>
+                            >
+                        <span class="active"> Contact</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="touch">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
+                    <div class="t-title">
+                        <h3 class="heading-title">Get in touch</h3>
+                    </div>
+                </div>
+                <div class="col-lg-2"></div>
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
+                <div class="contactForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input asp-for="Name" id="name" type="text" class="form-control" placeholder="Full Name">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input asp-for="Email" id="email" type="text" class="form-control" id="email" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input asp-for="Description" id="comment" type="text" class="form-control" id="subject" placeholder="Message">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input asp-for="Subject" id="subject" type="text" class="form-control" id="subject" placeholder="Subject">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <button class="btn btn btn-warning mt-4" id="contact" type="submit">SUBMIT NOW</button>
+                                <div class="submitting"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="col-lg-2"></div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="responsive-map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2822.
+                                    7806761080233!2d-93.29138368446431!3d44.96844997909819!2m3!1f0!2f0!3f0!3m2!
+                                    1i1024!2i768!4f13.1!3m3!1m2!1s0x52b32b6ee2c87c91%3A0xc20dff2748d2bd92!2sWalker+Art+Center!
+                                    5e0!3m2!1sen!2sus!4v1514524647889" width="600" height="450" frameborder="0"
+                style="border:0" allowfullscreen>
+                <div>
+                    <div style="position: absolute; left: 0px; top: 0px;">
+                        <div
+                            style="background-color: white; margin: 10px; padding: 1px; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; border-radius: 2px;">
+                            <div jstcache="0" style="">
+                                <div jstcache="51" class="place-card place-card-large">
+                                    <div class="place-desc-large">
+                                        <div jstcache="24" class="place-name" jsan="7.place-name">lastminute.com London
+                                            Eye</div>
+                                        <div jstcache="25" class="address" jsan="7.address">Riverside Building, County
+                                            Hall, London SE1 7PB, United Kingdom</div>
+                                    </div>
+                                    <div jstcache="26" class="navigate">
+                                        <div jsaction="placeCard.directions" class="navigate"> <a
+                                                aria-label="Get directions to this location on Google Maps."
+                                                target="_blank" jstcache="38"
+                                                href="https://maps.google.com/maps/dir//lastminute.com+London+Eye+Riverside+Building,+County+Hall+London+SE1+7PB+United+Kingdom/51.5032973,-0.1195537,10z/data=!4m5!4m4!1m0!1m2!1m1!1s0x487604b900d26973:0x4291f3172409ea92"
+                                                class="navigate-link">
+                                                <div class="icon navigate-icon"></div>
+                                                <div jstcache="39" class="navigate-text">Directions</div>
+                                            </a> </div>
+                                        <div class="tooltip-anchor">
+                                            <div class="tooltip-tip-outer"></div>
+                                            <div class="tooltip-tip-inner"></div>
+                                            <div class="tooltip-content">
+                                                <div jstcache="40">Get directions to this location on Google Maps.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="review-box">
+                                        <div aria-hidden="true" jstcache="27" class="review-number"
+                                            jsan="7.review-number,0.aria-hidden">4.5</div>
+                                        <div aria-label="Rated 4.5 out of 5" role="img" jstcache="28"
+                                            class="rating-stars">
+                                            <div jstcache="29" jsinstance="0" class="icon rating-star rating-full-star"
+                                                jsan="7.icon,7.rating-star,7.rating-full-star"></div>
+                                            <div jstcache="29" jsinstance="1" class="icon rating-star rating-full-star"
+                                                jsan="7.icon,7.rating-star,7.rating-full-star"></div>
+                                            <div jstcache="29" jsinstance="2" class="icon rating-star rating-full-star"
+                                                jsan="7.icon,7.rating-star,7.rating-full-star"></div>
+                                            <div jstcache="29" jsinstance="3" class="icon rating-star rating-full-star"
+                                                jsan="7.icon,7.rating-star,7.rating-full-star"></div>
+                                            <div jstcache="29" jsinstance="*4" class="icon rating-star rating-half-star"
+                                                jsan="7.icon,7.rating-star,7.rating-half-star"></div>
+                                        </div> <a aria-label="142,623 reviews" target="_blank" jstcache="30"
+                                            href="https://search.google.com/local/reviews?placeid=ChIJc2nSALkEdkgRkuoJJBfzkUI&amp;q=London+Eye,+London,+United+Kingdom&amp;hl=en&amp;gl=AZ"
+                                            jsaction="mouseup:placeCard.reviews" class="review-box-link"
+                                            jsan="0.aria-label,7.review-box-link,8.href,0.target,22.jsaction">142,623
+                                            reviews</a>
+                                    </div>
+                                    <div class="bottom-actions">
+                                        <div class="google-maps-link"> <a aria-label="View larger map" target="_blank"
+                                                jstcache="31"
+                                                href="https://maps.google.com/maps?ll=51.503297,-0.119554&amp;z=10&amp;t=m&amp;hl=en&amp;gl=US&amp;mapclient=embed&amp;cid=4796882358840715922"
+                                                jsaction="mouseup:placeCard.largerMap">View larger map</a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </iframe>
+        </div>
+    </section>
+    <!-- Main End -->
+
+<script>
+    var succses = document.getElementById("succses");
+    console.log(succses);
+    const myTimeout = setTimeout(myGreeting, 4000);
+    function myGreeting() {
+        document.getElementById("succses").style.display = "none";
+    }
+</script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.js"
+        integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+        crossorigin="anonymous"></script>
+
+<script>
+    $("#contact").click(() => {
+            Name = $("#name").val(),
+            Email = $("#email").val(),
+            Description = $("#comment").val(),
+            Subject = $("#subject").val();
+        console.log(Name)
+        console.log(Email)
+        console.log(Description)
+        console.log(Subject)
+
+        if (Name && Email && Description && Subject) {
+            $.post('contact/Index/', { Name, Email, Description, Subject })
+                .done(function (isValid) {
+              
+                    if (isValid == false) {
+                     
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!',
+                        });
+                    }
+                    else {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Your work has been saved',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+
+                    // Clear the input fields
+                    $("#name, #email, #Description, #subject").val('');
+                })
+  
+                .fail(function (error) {
+                   
+                    console.error('Error:', status, error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                    });
+                });
+        }
+
+        else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'They say it s empty!',
+            });
+        }
+    });
+</script>

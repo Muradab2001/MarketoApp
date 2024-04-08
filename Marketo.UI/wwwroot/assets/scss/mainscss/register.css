@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  font-family: Roboto;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.register {
+  padding-top: 50px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background-color: #fbfbfb;
+}
+.register .main-heading {
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1.2;
+  padding-bottom: 1.5rem !important;
+  padding-top: 0.2rem !important;
+  text-align: center !important;
+}/*# sourceMappingURL=register.css.map */

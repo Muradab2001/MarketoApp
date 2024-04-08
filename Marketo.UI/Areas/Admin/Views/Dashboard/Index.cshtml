@@ -1,0 +1,235 @@
+﻿@model HomeVM
+@{
+    ViewData["Title"] = "Index";
+
+}
+@{
+    int Categorycount = 0;
+    int Furniturecount = 0;
+    int Contactcount = 0;
+    int Ordercount = 0;
+    decimal OrderPrice = 0;
+}
+@foreach (Category item in Model.Categories)
+    Categorycount++;
+@foreach (Furniture item in Model.Furnitures)
+    Furniturecount++;
+@foreach (Contact item in Model.Contacts)
+{
+    Contactcount++;
+}
+@foreach (Order item in Model.Orders)
+{
+    Ordercount++;
+}
+
+@foreach (var item in Model.Orders)
+{
+    if (item.Status == true)
+    {
+        OrderPrice += item.TotalPrice;
+    }
+}
+
+
+<!-- partial -->
+<div class="main-panel">
+    <div class="content-wrapper">
+
+        <div class="row">
+            <div class="col-md-12 grid-margin">
+                <div class="d-flex justify-content-between flex-wrap">
+                    <div class="d-flex align-items-end flex-wrap">
+                        <div class="me-md-3 me-xl-5">
+                            <h2>Welcome Admin Panel,</h2>
+                            <p class="mb-md-0">Your analytics dashboard template.</p>
+                        </div>
+                        <div class="d-flex">
+                            <i class="mdi mdi-cube menu-icon"></i>
+                            <p class="text-muted mb-0 hover-cursor">&nbsp;/&nbsp;Dashboard&nbsp;</p>
+                        </div>
+                    </div>
+                    @*<div class="d-flex justify-content-between align-items-end flex-wrap">
+                    <button type="button" class="btn btn-light bg-white btn-icon me-3 d-none d-md-block ">
+                    <i class="mdi mdi-download text-muted"></i>
+                    </button>
+                    <button type="button" class="btn btn-light bg-white btn-icon me-3 mt-2 mt-xl-0">
+                    <i class="mdi mdi-clock-outline text-muted"></i>
+                    </button>
+                    <button type="button" class="btn btn-light bg-white btn-icon me-3 mt-2 mt-xl-0">
+                    <i class="mdi mdi-plus text-muted"></i>
+                    </button>
+                    <button class="btn btn-primary mt-2 mt-xl-0">Generate report</button>
+                    </div>*@
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+                <div class="card" style="background-color: gainsboro">
+                    <div class="card-body dashboard-tabs p-0">
+                        <ul class="nav nav-tabs px-4" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="overview-tab" data-bs-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Main</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content py-0 px-0">
+                            <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+                                <div class="d-flex flex-wrap justify-content-xl-between">
+                                    <div class="d-none d-xl-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                        <i class="mdi mdi-calendar-heart icon-lg me-3 text-primary"></i>
+                                        <div class="d-flex flex-column justify-content-around">
+                                            <small class="mb-1 text-muted" style="font-weight:600;">Start date</small>
+                                            <div class="dropdown">
+                                                <a class="btn btn-secondary dropdown-toggle p-0 bg-transparent border-0 text-dark shadow-none font-weight-medium" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <h5 class="mb-0 d-inline-block">@DateTime.Now</h5>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+
+                                        <img class="text-warning" style="width: 3rem;" src="~/admin/images/shipping.png" />
+                                        <div class="d-flex flex-column justify-content-around">
+                                            <small class="mb-1 text-muted" style="font-weight:600;">Total Product</small>
+                                            <h5 style="text-align:center" class="me-2 mb-0">@Furniturecount</h5>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                        <img style="width: 3rem;" src="~/admin/images/apps.png" />
+                                        <div class="d-flex flex-column justify-content-around">
+                                            <small class="mb-1 text-muted" style="font-weight:600;">Total Category</small>
+                                            <h5 class="me-2 mb-0" style="text-align:center">  @Categorycount</h5>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex py-3 border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                        <img style="width: 3rem;" src="~/admin/images/numbers.png" />
+                                        <div class="d-flex flex-column justify-content-around">
+                                            <small class="mb-1 text-muted" style="font-weight:600;">Message Count</small>
+                                            <h5 class="me-2 mb-0" style="text-align:center;">@Contactcount</h5>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
+                                        <img style="width: 3rem;" src="~/admin/images/Total-sales-64.png" />
+                                        <div class="d-flex flex-column justify-content-around">
+                                            <small class="mb-1 text-muted" style="font-weight:600;">Total Sales</small>
+                                            <h5 style="text-align:center" class="me-2 mb-0">@Ordercount</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="background-color: gainsboro">
+            <div class="col-md-7 grid-margin stretch-card">
+                <div id="salaryChart" style="height: 400px;"></div>
+            </div>
+            <div class="col-md-5 grid-margin stretch-card">
+                <div class="card" style="background-color: gainsboro">
+                    <div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                    <div class="card-body">
+                        <p class="card-title">Proceeds from general sales</p>
+                        <h1>$ @OrderPrice</h1>
+                        <h4>Gross sales over the years</h4>
+                        <p class="text-muted">Today, many people rely on computers to do homework, work, and create or store useful information. Therefore, it is important </p>
+                        <div id="total-sales-chart-legend"><ul class="dashboard-chart-legend mb-0 mt-4"><li><span style="background-color: rgba(47,91,191,0.77) "></span>2021</li><li><span style="background-color: rgba(77,131,255,0.77) "></span>2020</li><li><span style="background-color: rgba(77,131,255,0.43) "></span>Past years</li></ul></div>
+                    </div>
+                    <canvas id="total-sales-chart" width="427" height="213" style="display: block;" class="chartjs-render-monitor"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- partial:partials/_footer.html -->
+    <footer class="footer">
+        <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © <a href="https://www.bootstrapdash.com/" target="_blank">bootstrapdash.com </a>2021</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Only the best <a href="https://www.bootstrapdash.com/" target="_blank"> Bootstrap dashboard  </a> templates</span>
+        </div>
+    </footer>
+    <!-- partial -->
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/11.2.0/highcharts.js" integrity="sha512-yQKwezlCfw1iUy19z7b7xp0Xz20rBfEUI9iN5jQ55e56WXzi4ZPQpiKsn0xtSUWIYuV2y6B+GsHgsLK8KAZrFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.12/signalr.min.js" integrity="sha512-rQm2bvVuqEjdaJKcVj/+bx+FnccQCHZpBIMQRJkyDACamQ12m6XuFb2aHQYgdTEnnHNIsAMeh1hODKwm2Uvy5A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- main-panel ends -->
+<script>
+
+    var chart;
+
+    $(function () {
+        // Initialize the chart only once
+        chart = Highcharts.chart('salaryChart', {
+            chart: {
+                type: 'line',
+            },
+            xAxis: {
+                type: 'datetime',
+            },
+            yAxis: {
+                title: {
+                    text: 'Salary',
+                },
+            },
+            series: [{
+                name: 'Salary',
+                data: [],
+            }],
+        });
+
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/ChatHub")
+            .build();
+
+        connection.on("SendSalary", (salary,date) => {
+            console.log('Received OrderSalary:', salary);
+            var value = salary;
+            updateSginlrData(value,date);
+        });
+
+    @foreach (var item in Model.Orders)
+    {
+        <text>
+                updateChart(@item.TotalPrice, '@item.Date');
+        </text>
+    }
+
+            connection.start()
+                .then(function () {
+                    console.log('SignalR connected');
+                })
+                .catch(function (err) {
+                    console.error('SignalR connection error:', err.toString());
+                });
+    });
+
+    function updateChart(data, Date) {
+        // Ensure the chart is initialized before accessing series
+        if (chart) {
+            var series = chart.series[0];
+            var shift = series.data.length > 20;
+
+            if (Date === null || Date === undefined) {
+                // If Date is not provided or is null, use the current time
+                series.addPoint([new Date().getTime(), data], true, shift);
+            } else {
+                // If Date is provided, use the specified Date
+                series.addPoint([Date, data], true, shift);
+            }
+        }
+    }
+
+    function updateSginlrData(newSalary, Date) {
+        // Ensure the chart is initialized before accessing series
+        if (chart) {
+            var series = chart.series[0];
+
+            // Add the new point
+            var shift = series.data.length > 20;
+            series.addPoint([Date, newSalary], true, shift);
+        }
+    }
+</script>

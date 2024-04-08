@@ -1,0 +1,492 @@
+﻿@model Furniture
+@inject Marketo.UI.Services.LayoutService layoutService
+@{
+    ViewData["Title"] = "Detail";
+}
+
+@{
+    string categoryfurniture = "";
+    foreach (Category category in ViewBag.Category)
+    {
+        if (category.Id == Model.CategoryId)
+        {
+            categoryfurniture = category.Name;
+        }
+
+    }
+}
+
+@{
+    int ratingcount = 0;
+    int countpoint = 0;
+    string productcategory = "";
+    int num = 0;
+    bool result = false;
+    int prodid = Model.Id;
+    //if (User.Identity.IsAuthenticated)
+    //{
+    //    num = 1;
+
+    //    result = Model.Rates.Any(x => x.AppUser.UserName == User.Identity.Name);
+
+    //}
+}
+@*@foreach (var item in Model.Rates)
+{
+    ratingcount++;
+    countpoint += item.Point;
+}*@
+
+@*@foreach (Category category in ViewBag.category)
+{
+    if (Model.CategoryId == category.Id)
+    {
+        productcategory = category.Name;
+    }
+}
+@{
+    int Average = 0;
+    if (Model.Rates.Count > 0)
+    {
+        Average = countpoint / ratingcount;
+    }
+
+}*@
+
+<!-- Main start -->
+<main>
+    <section>
+        <div class="about">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-lg-12 g-4">
+                        <div class="about-title">
+                            <span>
+                                <a asp-controller="Home" asp-action="Index">Home </a>
+                            </span>
+                            >
+                            <span> <a>@categoryfurniture</a></span>
+                            >
+                            <span>@Model.Name</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="product-details">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="product-details-wrapper">
+                            <div class="row">
+                                <div class="col-lg-7">
+                                    <div class="product-wrapper-img mb-5">
+                                        <img src="~/assets/image/shop/@Model.Image" alt="">
+                                    </div>
+                                    <div class="product-mini-img d-flex" style="gap: 20px;">
+                                        <div class="mini-img">
+                                            <img src="/assets/image/shop/@Model.Image" style="width: 110px;" alt="">
+                                        </div>
+                                        @foreach (FurnitureImage furnitureimage in Model.Furnitureimages.Where(m => m.IsMain == false))
+                                        {
+                                            <div class="mini-img">
+                                                <img src="/assets/image/shop/@furnitureimage.Name" style="width: 110px;" alt="">
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="product-details-title">
+                                        <h3>@Model.Name</h3>
+                                        <br />
+                                        <div class="sku">
+                                            <span>
+                                                SKU: @Model.SKU
+                                            </span>
+                                        </div>
+                                        <br />
+                                        <div class="category">
+                                            <span>
+                                                Categories:
+                                            </span>
+                                            <a asp-controller="shop" asp-action="index" asp-route-id="@Model.CategoryId" style="color:#007bff;">@categoryfurniture</a>
+                                        </div>
+                                        <div class="review">
+                                            <span class="rate" style="letter-spacing: 0.5px;">
+                                                @* <b style="color:#000;">Average score:</b><br />*@
+                                               @* @for (int i = 0; i < Average; i++)
+                                                {
+                                                    <i class="fa-solid fa-star staron"></i>
+                                                }*@
+                                                <span> @ratingcount </span>
+                                            </span>
+                                            <a href="#">(customer reviews)</a>
+                                        </div>
+                                        <div class="desc">
+                                            <span>About the product:</span>
+                                        </div>
+                                        <p>
+                                            @Model.Article
+                                        </p>
+                                        <div class="price mb-5">
+
+                                            <span>
+                                                <span style="color: #4a4a4a; font-size: 15px; margin-left: -5px;">Price:</span>
+                                                $@Model.Price
+                                            </span>
+                                        </div>
+                                        <div class="stok mb-4">
+                                            @* <span style="color: #4a4a4a; font-size: 15px;"> Existence:</span>*@
+                                            @if (Model.Stock == true)
+                                            {
+                                                <span style="color: #F07F13;">Yes in stock</span>
+                                            }
+                                            else
+                                            {
+                                                <span style="color: #F07F13;">Out of stock</span>
+                                            }
+                                        </div>
+                                        <div class="quantity mb-5">
+                                            <div class="qty-input">
+                                                
+                                               
+                                            </div>
+                                            @if (Model.Stock == true)
+                                            {
+                                                <a asp-controller="Cart" asp-action="AddBasket" asp-route-id="@Model.Id" class="btn btn-default addToCart" onclick="">Add To Cart</a>
+                                            }
+                                          
+                                        </div>
+                                        <div class="share-icon">
+                                            <span class="feedback">
+                                                The product is already in the wishlist!
+                                                Browse Wishlist
+                                            </span>
+                                            <a class="wishlistFetch" asp-controller="Wishlist" asp-action="AddWishlist" asp-route-id="@Model.Id">
+                                                <i class="fa-solid fa-heart"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div id="@prodid" class="product-details-information">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="product-review-info">
+                            <ul class="nav-desc ">
+                                <li class="tab_one ">
+                                    <a id="1" class="btnclick active ">description</a>
+                                </li>
+                                <li class="tab_one ">
+                                    <a id="2" class="btnclick">reviews (@ratingcount)</a>
+                                </li>
+                            </ul>
+                            <div class="tab_body" id="1" style="display: block;">
+                                <div class="tab_contentt">
+                                    <div class="tab_desc">
+                                        @foreach (FurnitureDescription description in ViewBag.Desc)
+                                        {
+                                            @if (Model.FurnitureDescriptionId == description.Id)
+                                            {
+                                                <img width="100%" src="~/assets/image/shop/@description.Image" />
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab_body " id="2">
+                                <div class="tab_contentt starcon">
+                                    <div class="row starall">
+                                        @* <div class="col-md-6">
+                                        <div class="rate_detail">
+                                        <ul class="rate_list">
+                                        <li>
+                                        5 Stars
+                                        <span></span>
+                                        <span class="stars d-flex">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        </span>
+                                        </li>
+                                        <li>
+                                        4 Stars
+                                        <span></span>
+                                        <div class="stars d-flex">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star-half-stroke"></i>
+                                        </div>
+                                        </li>
+                                        <li>
+                                        3 Stars
+                                        <span></span>
+                                        <div class="stars d-flex">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star-half-stroke"></i>
+                                        <i class="fa-solid fa-star-half-stroke"></i>
+                                        </div>
+                                        </li>
+                                        <li>
+                                        2 Stars
+                                        <span></span>
+                                        <div class="stars d-flex">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star-half-stroke"></i>
+                                        <i class="fa-solid fa-star-half-stroke"></i>
+                                        <i class="fa-solid fa-star-half-stroke"></i>
+                                        </div>
+                                        </li>
+                                        <li>
+                                        1 Stars
+                                        <span></span>
+                                        <div class="stars d-flex">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star-half-stroke"></i>
+                                        <i class="fa-solid fa-star-half-stroke"></i>
+                                        <i class="fa-solid fa-star-half-stroke"></i>
+                                        <i class="fa-solid fa-star-half-stroke"></i>
+                                        </div>
+                                        </li>
+                                        </ul>
+                                        </div>
+                                        </div>
+                                        <div class="col-md-6 align-self-center">
+                                        <div class="rate_score">
+                                        <div class="stars d-flex">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star-half-stroke"></i>
+                                        <i class="fa-solid fa-star-half-stroke"></i>
+                                        </div>
+                                        <p class="rating-des">
+                                        Average Star Rating: <em>3.3 out of 5</em>
+                                        (3 vote)
+                                        </p>
+                                        <span class="help-tip">
+                                        <i class="fa-solid fa-question"></i>
+                                        <span class="help-tip-text">
+                                        If you finish the payment today,
+                                        your order will arrive within the estimated delivery
+                                        time.
+                                        </span>
+                                        </span>
+                                        </div>
+                                        </div>*@
+                                    </div>
+                                </div>
+                                <div class="commet-section">
+                                    <h5 id="commet-title">
+                                        @Model.Name
+                                    </h5>
+                                    <ul>
+                            
+                                        <div class="commentadddiv">
+                                            @await Html.PartialAsync("_commentPartial",Model)
+                                        </div>
+                                    </ul>
+                                </div>
+                                <div class="review_form">
+                                    <div id="review_form">
+                                        <div id="respond" class="comment-respond">
+                                            <span id="reply-title" class="comment-title">
+                                                Add a review
+                                            </span>
+                                            <form id="commentform" class="comment-form">
+                                                <p class="comment-form-cookies">
+                                                    <input id="wp-comment-cookies-consent"
+                                                           name="wp-comment-cookies-consent" type="checkbox"
+                                                           value="yes"> <label for="wp-comment-cookies-consent">
+                                                        Save my
+                                                        name, email, and website in this browser for the next time I
+                                                        comment.
+                                                    </label>
+                                                </p>
+                                                @if (num != 0 && !result)
+                                                {
+                                                    <div class="comment-form-rating">
+                                                        <label for="rating">
+                                                            Your rating
+                                                            <span class="required">*</span>
+                                                        </label>
+                                                        <div class="rating-stars d-flex my-3">
+                                                            <ul id='stars' style="display:flex; ">
+                                                                <a style="color:#F07F13;" class="rate-point" data-id="5" asp-controller="Furniture" asp-action="AddRate">
+                                                                <li class='star' title='Poor' data-value='5'>
+                                                                    <i class='fa fa-star fa-fw'></i>
+                                                                </li>
+                                                                </a>
+                                                                <a style="color:#F07F13;" class="rate-point" data-id="2" asp-controller="Furniture" asp-action="AddRate">
+                                                                <li class='star' title='Fair' data-value='5'>
+                                                                    <i class='fa fa-star fa-fw'></i>
+                                                                </li>
+                                                                </a>
+                                                                <a style="color:#F07F13;" class="rate-point" data-id="3" asp-controller="Furniture" asp-action="AddRate">
+                                                                <li class='star' title='Good' data-value='5'>
+                                                                    <i class='fa fa-star fa-fw'></i>
+                                                                </li>
+                                                                </a>
+                                                                <a style="color:#F07F13;" class="rate-point" data-id="4" asp-controller="Furniture" asp-action="AddRate">
+                                                                <li class='star' title='Excellent' data-value='5'>
+                                                                    <i class='fa fa-star fa-fw'></i>
+                                                                </li>
+                                                                </a>
+                                                                <a style="color:#F07F13;" class="rate-point" data-id="5" asp-controller="Furniture" asp-action="AddRate">
+                                                                <li class='star' title='WOW!!!' data-value='5'>
+                                                                    <i class='fa fa-star fa-fw'></i>
+                                                                </li>
+                                                                </a>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                }
+
+                                            </form>
+                                            @if (User.Identity.IsAuthenticated)
+                                            {
+                                            @*     <form method="post" class="comment-form" asp-controller="Furniture" asp-action="AddComment">
+                                                    <p class="comment-form-comment">
+                                                        <label for="comment">
+                                                            Your review
+                                                            <span class="required">*</span>
+                                                        </label>
+                                                        <textarea id="comment" placeholder="Write..." name="Text" cols="45" rows="8">
+                                                                </textarea>
+                                                        <input type="hidden" name="FurnitureId" value="@Model.Id" />
+                                                    </p>
+                                                    <p class="form-submit">
+                                                        <input name="submit" type="submit" id="submit" class="submit"
+                                                           value="Submit">
+                                                    </p>
+                                                </form> *@
+                                                <div method="post" class="">
+                                                    <div class="input">
+
+                                                        <p>Your review *</p>
+                                                        <textarea required class="form-control" id="message" rows="3" style="font-size:15px;"></textarea>
+                                                        <input required type="hidden" name="MedicineId" value="@Model.Id" />
+                                                    </div>
+
+                                                    <button class="btn addcomment" data-id=@Model.Id type="submit">Submit</button>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <a asp-controller="Account" asp-action="Login" style="text-decoration:none; font-size: 24px;     background-color: #f07f13; border-radius: 5px; color: #fff; padding: 5px 5px; position: absolute; ">
+                                                    Write a comment
+
+                                                </a>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="new-arrivals">
+        <div class="container pt-5 pb-3">
+            <div class="content-header">
+                <h2 class="content-title">
+                    Related products
+                </h2>
+                <div class="clearfix"></div>
+            </div>
+            <div id="1" style="display: block;" class="arrival_content">
+                <div class="row justify-content-center product-wrap g-2">
+                    @{
+                        int count = 0;
+                    }
+                    @foreach (Furniture furniture in ViewBag.furniture)
+                    {
+                        count++;
+
+                        if (Model.CategoryId == furniture.CategoryId)
+                        {
+                            if (Model.Id != furniture.Id && count < 6)
+                            {
+                                <div class="col-lg-3 col-12 col-sm-6 col-md-4 boxs">
+                                    <div class="card" id="demo">
+                                        <a asp-controller="Furniture" asp-action="detail" asp-route-id="@furniture.Id">
+                                            <img style="width: 320px; height: 315px;" src="~/assets/image/shop/@furniture.Image" class="card-img-top img-fluid" alt="...">
+                                        </a>
+                                        <div class="card-body text-center">
+                                            <span style="font-size: 18px; font-weight:600" class="product-categories">
+                                                @categoryfurniture
+                                            </span>
+                                            <a class="product-title" href="#">@furniture.Name</a>
+                                            <span class="price">
+                                                <span class="Price-amount amount">
+                                                    <bdi>
+                                                        <span class="Price-currencySymbol">$</span>@furniture.Price
+                                                    </bdi>
+                                                </span>
+                                            </span>
+                                            <div class="hover-area text-center" id="text">
+                                                <a asp-controller="Cart" asp-action="AddBasket" asp-route-id="@Model.Id" type="button" class="add-to-cart addToCart">
+                                                    <i class="fa-solid fa-basket-shopping">
+                                                    </i> Add to cart
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<!-- Main end -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+        $(function () {
+            $(document).on("click", ".addcomment", function () {
+               
+                var txt = $("#message").val();
+                var btn = $(this);
+                var medid = btn.data("id");
+
+                $.ajax({
+                    type: "GET",
+                    url: "/Furniture/AddComment/",
+                    data: {
+                        medid: medid,
+                        text: txt
+                    },
+                    success: function (data) {
+                        $("#message").val('');
+                        $(".commentadddiv").html(data);
+                    }
+                });
+            });
+
+
+        });
+</script>

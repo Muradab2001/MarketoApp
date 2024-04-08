@@ -1,0 +1,128 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  font-family: Roboto;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.faq {
+  background-color: #fafafa;
+  margin-top: 20px;
+  height: 85px;
+}
+.faq .faq-title {
+  margin-left: -25px !important;
+  margin: 10px;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  text-transform: capitalize;
+}
+.faq .faq-title span {
+  margin: 10px;
+}
+.faq .faq-title span a {
+  margin: 10px;
+  text-decoration: none;
+  color: #777;
+}
+
+.whatis {
+  padding: 60px 0 50px;
+}
+.whatis .faq-text {
+  padding: 10px 15px 10px 10px;
+  margin-bottom: 20px;
+}
+.whatis .faq-text .faq-title {
+  margin: 0 0 30px;
+  padding: 30px;
+  background-color: #fafafa;
+}
+.whatis .faq-text .faq-title .faq-sub {
+  text-align: left;
+  color: #222;
+  font-weight: 600;
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+.whatis .faq-text .faq-title .faq-desc {
+  text-align: left;
+  color: #555;
+  margin-bottom: 0;
+  font-size: 17px;
+  margin-top: 15px;
+  font-weight: 500;
+}
+
+.update {
+  background-color: #f9f9f9 !important;
+  margin-top: 55px;
+  overflow: hidden;
+  padding: 85px 0;
+  width: 100%;
+  height: auto;
+}
+.update .update-content {
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  margin-left: 50px;
+}
+.update .update-content .up-title {
+  color: #222 !important;
+  letter-spacing: -0.1px;
+  font-weight: 600;
+}
+.update .update-content .up-description {
+  color: #777 !important;
+  letter-spacing: -0.4px;
+}
+.update .up-inp {
+  padding: 10px;
+}
+.update .up-inp .newsletter {
+  position: relative;
+  display: flex;
+}
+.update .up-inp .newsletter label {
+  width: 100%;
+  bottom: -34px;
+  top: inherit;
+  display: block;
+  position: absolute;
+  margin-bottom: 0;
+  left: 0;
+}
+.update .up-inp .newsletter .news {
+  width: 100%;
+  border-radius: 4px 0 0 4px;
+  border: 1px solid #e7e7e7;
+  border-right: 0;
+  background-color: #fff;
+  outline: none;
+  border: none;
+  padding-left: 33px;
+}
+.update .up-inp .newsletter .mailchimp-btn {
+  border-radius: 0 4px 4px 0;
+  border-width: 2px 2px 2px 0;
+  border-style: solid;
+  border-color: #f07f13 !important;
+  background-color: #f07f13 !important;
+  color: #fff;
+  font-size: 18px;
+  padding: 0 35px;
+  letter-spacing: 0.9;
+  font-weight: 500;
+  height: 52px;
+  opacity: 1 !important;
+  text-transform: uppercase;
+  border-radius: 5px;
+}
+.update .up-inp .newsletter .mailchimp-btn:hover {
+  opacity: 0.9 !important;
+  transition: 0.3s ease-in-out;
+}/*# sourceMappingURL=faq.css.map */

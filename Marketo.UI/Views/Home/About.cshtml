@@ -1,0 +1,161 @@
+﻿@model List<About>
+@{
+    ViewData["Title"] = "About";
+    int ProductCount = 0;
+    int UserCount = 0;
+
+    foreach (var item in ViewBag.furniture)
+    {
+        ProductCount++;
+    }
+    foreach (var item in ViewBag.user)
+    {
+        UserCount++;
+    }
+}
+
+<!-- Main start -->
+<main>
+    <section>
+        <div class="about">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-sm-12 g-4">
+                        <div class="about-title">
+                            <span>
+                                <a asp-controller="Home" asp-action="About">Home </a>
+                            </span>
+                            >
+                            <span> About Us</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="history">
+        <div class="container">
+           @foreach (About item in Model)
+            {
+               if(item.Order==1){
+                    <div class="row g-5">
+                        <div class="col-lg-7">
+                            <div class="elementor-about">
+                                <div class="about-content">
+                                    <h2 class="heading-sub">@item.SubTitle</h2>
+                                    <h3 class="heading-title">@item.Title</h3>
+                                    <p class="lead">
+                                        @item.Desc
+                                    </p>
+                                    <span class="mark-text">HISTORY</span>
+                                </div>
+                            </div>
+                            <div class="row g-0">
+                                <div class="col-lg-4">
+                                    <div class="statis">
+                                        <h2 class="heading-sub">@ProductCount</h2>
+                                        <h3 class="heading-title">Product Count</h3>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="statis">
+                                        <h2 class="heading-sub">@UserCount</h2>
+                                        <h3 class="heading-title">User Count</h3>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="statis">
+                                        <h2 class="heading-sub">100%</h2>
+                                        <h3 class="heading-title">
+                                            Clients Satisfaction
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="element-image">
+                                <img src="~/assets/image/@item.Image" class="attachment-large img-fluid" alt="">
+                            </div>
+                        </div>
+                    </div>
+               }
+            }
+        </div>
+    </section>
+    <section class="vision">
+        <div class="container">
+            @foreach (About item in Model)
+            {
+                if (item.Order==2)
+                {
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="our-img">
+                                <img src="~/assets/image/@item.Image" class="img-fluid" alt="">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="our-vision">
+                                <h2 class="heading-sub">@item.SubTitle</h2>
+                                <h3 class="heading-title">
+                                    @item.Title
+                                </h3>
+                                <p class="lead">
+                                    @item.Desc
+                                </p>
+                                <span class="ourmark-text">VISION</span>
+                            </div>
+                            <div class="elementor-widget">
+                                <ul class="list-items">
+                                    <li class="elementor-list-item">
+                                        <span class="elementor-text">Credibly innovate granular internal</span>
+                                    </li>
+                                    <li class="elementor-list-item">
+                                        <span class="elementor-text">Grantedly underconstructions reloaded</span>
+                                    </li>
+                                    <li class="elementor-list-item">
+                                        <span class="elementor-text">Interactively procrastinate high-payoff</span>
+                                    </li>
+                                    <li class="elementor-list-item">
+                                        <span class="elementor-text">Completely synergize resource taxing relationships</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </section>
+    <section class="update">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="update-content">
+                        <h3 class="up-title">
+                            <span>
+                                Newsletter & Get Updates
+                            </span>
+                        </h3>
+                        <p class="up-description">
+                            Sign up for our newsletter to get up-to-date from us
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="up-inp">
+                        <form action="#" method="post" class="newsletter newsLetter-v3" data-link="test"
+                              novalidate="true">
+                            <label for="newsletter-email"></label>
+                            <input class="news" type="email" name="EMAIL" id="newsletter-email"
+                                   placeholder="Enter Your Mail Here .....">
+                            <input type="submit" class="mailchimp-btn" value="submit">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<!-- Main end -->

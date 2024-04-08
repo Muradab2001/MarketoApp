@@ -1,0 +1,49 @@
+﻿@model List<OrderItem>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="main-panel">
+    <h5 class="d-flex" style="justify-content: center; background-color: #d1e7dd; color: #000; font-size: 20px; padding: 10px;">Order</h5>
+    <div class="table-responsive">
+        <table class="table table-bordered" style="text-align: center">
+            <thead class="table table-success" style="text-align: center">
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                   
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Image
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (OrderItem order in Model)
+                {
+                    <tr class="table-light">
+                        <td>
+                            @order.Name
+                        </td>
+                        <td>
+                            @order.Price
+                        </td>
+                        <td>
+                            @order.Quantity
+                        </td>
+                        <td>
+                            <img style="width:110px; height:110px"
+                                 src="~/assets/image/shop/@order.Furniture.Image" />
+                       
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,380 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: Roboto;
+    font-family: Arial, Helvetica, sans-serif; 
+}
+.cartt{
+    margin-top: 30px;
+    .cart-form{
+        margin-top: 25px;
+        margin-bottom: 25px;
+        .shop_cart{
+            border: 1px solid rgba(0,0,0,.1);
+            margin: 0 -1px 24px 0;
+            text-align: left;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 14px;
+            th{
+                font-weight: 700;
+                line-height: 1.5em;
+                padding: 20px !important;
+                text-align: center;
+                border-top: 1px solid #e7e7e7;
+                vertical-align: middle;
+            }
+            .product-thumbnail{
+                min-width: 32px;
+                font-weight: 700;
+                line-height: 1.5em;
+                padding: 20px !important;
+                text-align: center;
+                border-top: 1px solid #e7e7e7;
+                vertical-align: middle;
+                img{
+                    display: inline-block;
+                }
+                @media screen and (max-width: 950px) {
+                    img{
+                        display: none;
+                    }
+                }
+            }
+            .cart-items{
+                td{
+                    border-top: 1px solid rgba(0,0,0,.1);
+                    vertical-align: middle;
+                    line-height: 1.5em;
+                    padding: 20px !important;
+                    .remove{
+                        font-size: 1.5em;
+                        height: 1em;
+                        width: 1em;
+                        text-align: center;
+                        line-height: 1;
+                        border-radius: 100%;
+                        color: red!important;
+                        text-decoration: none;
+                        font-weight: 700;
+                        border: 0;
+                    }
+                    .remove:hover{
+                        color: #fff!important;
+                        background: red;
+                    }
+                    a{
+                        color: #0056b3;
+                        text-decoration: none;
+                        font-weight: 600;
+                    }
+                    a:hover{
+                        opacity: 0.6;
+                        transition: 0.5s linear;
+                    }
+                    .Price-amount{
+                        color: #F07F13;
+                        font-weight: 600;
+                        opacity: 0.8;
+                    }
+                }
+                .product-thumbnail{
+                    min-width: 32px;
+                    border-top: 1px solid rgba(0,0,0,.1);
+                    vertical-align: middle;
+                    line-height: 1.5em;
+                    padding: 20px !important;
+                    a{
+                        box-shadow: none;
+                        text-decoration: none;
+                        img{
+                            width: 100px;
+                            height: auto;
+                        }
+                    }
+                }
+                .product-quantity{
+                    vertical-align: middle;
+                    .qty-input{
+                        display: inline-flex;
+                        white-space: nowrap;
+                        vertical-align: top;
+                        .qty-count{
+                            margin: 0;
+                            vertical-align: middle;
+                            background: #f9f9f9;
+                            cursor: pointer;
+                            box-shadow: none;
+                            padding: 0 5px;
+                            min-width: 43px;
+                            height: 45px;
+                            border: 1px solid rgba(129,129,129,.2);
+                            display: inline-block;
+                            color: #777;                    
+                        }
+                        .reader-text{
+                            clip: rect(1px,1px,1px,1px);
+                            position: absolute!important;
+                            height: 1px;
+                            width: 1px;
+                            overflow: hidden;
+                            border: 0;
+                            margin: -1px;
+                            padding: 0;
+                        }
+                        .product-qty{
+                            border: 1px solid #e3e3e3!important;
+                            width: 65px;
+                            height: 45px;
+                            display: inline-block;
+                            color: #777;
+                            border-radius: 0;
+                            text-align: center;
+                            outline: 0;
+                            appearance: none;
+                            background-color: #fff;
+                            // padding: 0 22px;
+                            font-size: 1em!important;
+                            overflow: visible;
+                        }
+                        .qty-count--add{
+                            margin: 0;
+                            vertical-align: middle;
+                            background: #f9f9f9;
+                            cursor: pointer;
+                            box-shadow: none;
+                            padding: 0 5px;
+                            min-width: 43px;
+                            height: 45px;
+                            border: 1px solid rgba(129,129,129,.2);
+                            display: inline-block;
+                            color: #777;                    
+                        }
+                    }
+                }
+            }
+            @media screen and (max-width: 950px) {
+                th{
+                    display: block;
+                }
+                td{
+                    display: block;
+                }
+            }
+            .actions{
+                text-align: right;
+                vertical-align: middle;
+                border-top: 1px solid rgba(0,0,0,.1);
+                line-height: 1.5em;
+                border-left: none;
+                .coupon{
+                    float: left;
+                    label{
+                        display: none;
+                    }
+                    .input-text{
+                        padding: 13px 6px;
+                        max-width: 170px;
+                        // width: 100%;
+                        float: left;
+                        box-sizing: border-box;
+                        border: 1px solid #d3ced2;
+                        margin: 0 4px 0 0;
+                        outline: 0;
+                    }
+                    .button{
+                        float: none;
+                        background-color: #f07f13;
+                        color: #fff;
+                        padding: 16px 32px!important;
+                        font-size: 100%;
+                        margin: 0;
+                        line-height: 1;
+                        cursor: pointer;
+                        position: relative;
+                        text-decoration: none;
+                        overflow: visible;
+                        font-weight: 700;
+                        border-radius: 3px;
+                        left: auto;
+                        border: 0;
+                        display: inline-block;
+                        box-shadow: none;
+                        text-shadow: none;
+                        opacity: 1 !important;
+                    }
+                    .button:hover{
+                        color: #fff;
+                        background-color: #83b735;
+                        transition: 0.2s linear;
+                    }
+                }
+                .button{
+                    float: none;
+                    background-color: #f07f13;
+                    color: #fff;
+                    padding: 16px 32px!important;
+                    font-size: 100%;
+                    margin: 0;
+                    line-height: 1;
+                    cursor: pointer;
+                    position: relative;
+                    text-decoration: none;
+                    overflow: visible;
+                    font-weight: 700;
+                    border-radius: 3px;
+                    left: auto;
+                    border: 0;
+                    display: inline-block;
+                    box-shadow: none;
+                    text-shadow: none;
+                    cursor: not-allowed;
+                    opacity: 0.7;
+                }
+                .button:hover{
+                    color: inherit;
+                    background-color: #ebe9eb;
+                }
+            }
+        }
+    }
+    .cart-collaterals{
+        width: 100%;
+        .cart_totals{
+            float: right;
+            width: 48%;
+            h2{
+                // font-family: Roboto;
+                font-weight: 500;
+                font-style: 34px;
+            }
+                .shop_table{
+                    padding: 0;
+                    border: 1px solid rgba(0,0,0,.1);
+                    margin: 0 -1px 24px 0;
+                    text-align: left;
+                    width: 100%;
+                    border-radius: 5px;
+                    .cart-subtotal{
+                        th{
+                            border-top: 0;
+                            width: 35%;
+                            font-weight: 700;
+                        }
+                        .subtotal{
+                            border-top: 0;
+                            text-align: center;
+                            span{
+                                color: #F07F13;
+                                padding-left: 5px;
+                            }
+                        }
+                    }   
+                        .shipping-total{
+                            th{
+                                border-top: 1px solid #ebe9eb;
+                                padding-top: 20px;
+                            }
+                            .ship{
+                                border-top: 1px solid #ebe9eb;
+                                padding: 20px!important;
+                                .ship-method{
+                                    li{
+                                        margin: 0 0 0.5em;
+                                        line-height: 1.5em;
+                                        list-style: none outside;
+                                        input{
+                                            margin: 3px 0.4375em 0 0;
+                                            vertical-align: top;
+                                        }
+                                        label{
+                                            display: inline;
+                                            font-size: 15px;
+                                            padding-right: 40px;
+                                        }   
+                                }
+                                p{
+                                    font-size: 14px !important;
+                                    margin-bottom: 0;
+                                }
+                                .shipping-calculator{
+                                    text-decoration: none !important;
+                                    .csta{
+                                        margin-top: 0.5em;
+                                        display: none;
+                                        text-decoration: none !important;
+                                    }
+                                    .calculator-form{
+                                        margin: 1em 0 0 0;
+                                        .form-row{
+                                            margin-top: 0;
+                                            margin-bottom: 1rem;
+                                            padding: 3px;
+                                            margin: 0 0 6px;
+                                            clear: both;
+                                            .buttonA{
+                                                background-color: #f07f13 !important;
+                                                // font-size: 100%;
+                                                // margin: 0;
+                                                // line-height: 1;
+                                                // cursor: pointer;
+                                                // position: relative;
+                                                text-decoration: none;
+                                            }
+                                        }
+                                        
+                                    }
+                                }
+                            }
+                        }
+                    }   .order-total{
+                            th{
+                                border-top: 1px solid #ebe9eb;
+                            }
+                            td{
+                                span{
+                                    color: #F07F13;
+                                    padding-left: 5px;
+                                }
+                            }
+                        }
+            }
+                .proceedd{
+                    padding: 1em 0;
+                    a{
+                        background-color: #f07f13;
+                        text-decoration: none;
+                        color: #fff;
+                        border-radius: 4px;
+                        padding: 16px 194px!important;
+                    }
+                    a:hover{
+                        color: #fff;
+                        background-color: #83b735;
+                        transition: 0.3s linear;
+                    }
+                    
+                }
+                @media screen and (max-width: 950px) {
+                    .proceedd{
+                        a{
+                            background-color: #f07f13;
+                            text-decoration: none;
+                            color: #fff;
+                            border-radius: 4px;
+                            padding: 10px 40px!important
+                        }
+                    }
+                }
+        }
+        @media screen and (max-width: 950px) {
+            .cart_totals{
+                width: 100%;
+            }
+        }
+    
+    }
+}

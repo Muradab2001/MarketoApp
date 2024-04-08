@@ -1,0 +1,180 @@
+﻿@model HomeVM
+@inject Marketo.UI.Services.LayoutService layoutService
+@{
+    ViewData["Title"] = "Index";
+    
+}
+
+
+
+ <!-- Main start -->
+    <section>
+        <div class="about">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-sm-12 g-4">
+                        <div class="about-title">
+                            <span>
+                                <a asp-controller="home" asp-action="index">Home </a>
+                            </span>
+                            >
+                            <span> Shop</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="filter">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="filter-title">
+                        <h3>Filter:</h3>
+                    <div class="wrapper">
+                        <form method="post" asp-controller="Shop" asp-route-max="@ViewBag.Max" asp-route-min="@ViewBag.Min" asp-route-id="@(ViewBag.CurrentCategory==null?null:ViewBag.CurrentCategory)" asp-route-key="@ViewBag.CurrentKey" asp-action="index">
+                            <div class="price-input">
+                                <div class="field">
+                                    <span>Min</span>
+                                    <input style="height:1rem;" type="number" name="min" class="input-min" value="2500">
+                                </div>
+
+                                <div class="field">
+                                    <span>Max</span>
+                                    <input style="height:1rem;" type="number" name="max" class="input-max" value="7500">
+                                </div>
+                            </div>
+
+                            <div class="slider">
+                                <div class="progress" style="left: 25%; right: 35%; background:none"></div>
+                            </div>
+                            <div class="range-input">
+                                <input type="range" asp-controller="Shop" class="range-min" min="0" max="10000" value="2500" step="100">
+                                <input type="range" class="range-max" min="0" max="10000" value="7500" step="100">
+                            </div>
+                            <button style="line-height: 32px;">FILTER</button>
+                        </form>
+                    </div>
+
+                    </div>
+                  
+                    <div class="product-category">
+                        <h3 class="category-title">Product categories</h3>
+                        <ul class="category-list">
+                            @foreach (Category item in Model.Categories)
+                        {
+                        @if (item.Furnitures.Count>0)
+                            {
+                                <li class="list-item">
+                                    <a asp-route-max="@ViewBag.Max" asp-route-min="@ViewBag.Min" asp-route-key="@ViewBag.CurrentKey" asp-action="Index" asp-route-id="@item.Id">
+                                        @item.Name
+                                        <span class="count">(@item.Furnitures.Count)</span>
+                                    </a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                    </div>
+                    <div id="block-2" class="widget widget_block media_image">
+                        <figure class="block-image size-full">
+                            <img width="255" height="475"
+                             src="~/assets/image/shop/@layoutService.getSettings().FirstOrDefault(s=>s.Key.Trim().ToLower() == "advertising")?.Value"
+                                alt="" class="wp-image-2899 lazyloaded" data-ll-status="loaded">
+                        </figure>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="products-header">
+                        <h5 class="products-header_title page-title">Shop</h5>
+                        <div class="media filter-content">
+                        <div class="dropdown">
+                            <button class="dropbtn">Sort by</button>
+                            <div class="dropdown-content">
+                                <a class="dropdown-item" asp-route-key="2" asp-controller="Shop" asp-route-max="@ViewBag.Max" asp-route-min="@ViewBag.Min" asp-action="Index" asp-route-page="@ViewBag.CurrentPage" asp-route-point="@ViewBag.Point" asp-route-id="@(ViewBag.CurrentCategory==null?null:ViewBag.CurrentCategory)">Name</a>
+                                <a class="dropdown-item" asp-route-key="3" asp-controller="Shop" asp-route-max="@ViewBag.Max" asp-route-min="@ViewBag.Min" asp-action="Index" asp-route-page="@ViewBag.CurrentPage" asp-route-point="@ViewBag.Point" asp-route-id="@(ViewBag.CurrentCategory==null?null:ViewBag.CurrentCategory)">price by ascending</a>
+                                <a class="dropdown-item" asp-route-key="4" asp-controller="Shop" asp-route-max="@ViewBag.Max" asp-route-min="@ViewBag.Min" asp-action="Index" asp-route-page="@ViewBag.CurrentPage" asp-route-point="@ViewBag.Point" asp-route-id="@(ViewBag.CurrentCategory==null?null:ViewBag.CurrentCategory)">price by descending</a>
+                            </div>
+                        </div>
+                        @*   </select>*@
+                        <input type="hidden" name="paged" value="1">
+                            <div class="media">
+                                <h6>View</h6>
+                                <ul class="nav nav-tabs view-nav" id="myTab" role="tablist">
+                                    <li class="nav-item" id="tab1">
+                                        <a id="1" class="nav-link btn_link active_link">
+                                            <i class="fa-solid fa-table-cells"></i>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item" id="tab1">
+                                        <a id="2" class="nav-link btn_link">
+                                            <i class="fa-solid fa-bars"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="1" style="display: block;" class="shop_content">
+                        <div class="row is-grid-active">
+                        @await Html.PartialAsync("_shopPartial", Model.Furnitures)
+                        <div class="row justify-content-center mt-4">
+                            <ul class="pagination justify-content-center">
+                                @if (ViewBag.CurrentPage > 1)
+                                {
+                                    <li class="page-item"><a class="page-link" asp-controller="Shop" asp-route-max="@ViewBag.Max" asp-route-min="@ViewBag.Min" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage-1)" asp-route-id="@(ViewBag.CurrentCategory==null?null:ViewBag.CurrentCategory)" asp-route-key="@ViewBag.CurrentKey"><span>Previous</span></a></li>
+                                }
+                                @for (int i = 1; i <= 2; i++)
+                                {
+                                    <li class="page-item @(i==ViewBag.CurrentPage?"disabled":"")"><a class="page-link" asp-route-max="@ViewBag.Max" asp-route-min="@ViewBag.Min" asp-controller="Shop" asp-action="Index" asp-route-page="@i" asp-route-id="@(ViewBag.CurrentCategory==null?null:ViewBag.CurrentCategory)" asp-route-key="@ViewBag.CurrentKey"><span>@i</span></a></li>
+                                }
+                                @for (int i = 3; i <= ViewBag.TotalPage; i++)
+                                {
+                                    <li class="page-item @(i==ViewBag.CurrentPage?"disabled":"")"><a class="page-link" asp-route-max="@ViewBag.Max" asp-route-min="@ViewBag.Min" asp-controller="Shop" asp-action="Index" asp-route-page="@i" asp-route-id="@(ViewBag.CurrentCategory==null?null:ViewBag.CurrentCategory)" asp-route-key="@ViewBag.CurrentKey"><span>@i</span></a></li>
+                                }
+                                @if (ViewBag.CurrentPage < ViewBag.TotalPage)
+                                {
+                                    <li class="page-item"><a class="page-link" asp-controller="Shop" asp-route-max="@ViewBag.Max" asp-route-min="@ViewBag.Min" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage+1)" asp-route-id="@(ViewBag.CurrentCategory==null?null:ViewBag.CurrentCategory)" asp-route-key="@ViewBag.CurrentKey"><span>Next</span></a></li>
+                                }
+                            </ul>
+                        </div>
+                        </div>
+                    </div>
+                    <div id="2" class="shop_content">
+                        <div class="row is-grid-active">
+                            @foreach (Furniture furniture in Model.Furnitures.OrderByDescending(c=>c.Name).Take(6))
+                            {
+                               
+
+                                <div class="col-lg-6">
+                                    <a asp-controller="Furniture" asp-action="Detail" asp-route-id="@furniture.Id">
+                                        <div class="product-m d-flex text-start p-3" style="border: 1px solid #e3e3e3;">
+                                            <div class="thumb d-flex">
+                                                <a class="aspect aspect--bg-grey aspect--square u-d-block"
+                                               href="product-detail.    html">
+                                                    <img width="125" height="125" class="aspect__img"
+                                                     src="~/assets/image/shop/@furniture.Image" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="content text-center py-0">
+                                               
+                                                <a asp-controller="Wishlist" asp-action="AddWishlist" class="hrt btn--e-brand d-flex wishlistFetch" asp-route-id="@furniture.Id" data-modal="modal"
+                                               data-modal-id="#add-to-cart">
+                                                    <i class="fa-regular fa-heart"></i>
+                                                </a>
+                                                <div class="name">
+                                                    <a href="product-detail.html">@furniture.Name</a>
+                                                </div>
+                                                <div class="price">$@furniture.Price</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                       
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Main end -->

@@ -1,0 +1,71 @@
+﻿@model List<Faq>
+@{
+    ViewData["Title"] = "Faq";
+}
+
+<!-- Main start -->
+<section>
+    <div class="faq">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-sm-12 g-4">
+                    <div class="faq-title">
+                        <span>
+                            <a asp-controller="Home" asp-action="Index">Home </a>
+                        </span>
+                        >
+                        <span> FAQ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="whatis">
+    <div class="container">
+        <div class="row">
+            @foreach(Faq faq in Model)
+            {
+                <div class="col-lg-6">
+                    <div class="faq-text">
+                        <div class="faq-title">
+                            <h2 class="faq-sub">@faq.Title</h2>
+                            <p class="faq-desc">
+                                @faq.Desc
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<section class="update">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="update-content">
+                    <h3 class="up-title">
+                        <span>
+                            Newsletter & Get Updates
+                        </span>
+                    </h3>
+                    <p class="up-description">
+                        Sign up for our newsletter to get up-to-date from us
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="up-inp">
+                    <form action="#" method="POST" class="newsletter newsLetter-v3" data-link="test"
+                          novalidate="true">
+                        <label for="newsletter-email"></label>
+                        <input class="news" type="email" name="EMAIL" id="newsletter-email"
+                               placeholder="Enter Your Mail Here .....">
+                        <input type="submit" class="mailchimp-btn" value="submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

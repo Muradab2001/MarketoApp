@@ -1,0 +1,35 @@
+﻿@model Setting
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<main style="background-color: #666;" class="main-panel">
+    <h1 style="text-align:center; text-align: center; background-color:chartreuse">Setting Edit</h1>
+    <div class="my-2">
+        <img style="width: 20rem;text-align: center;" src="~/assets/image/logo/@Model.Value" />
+        </di>
+        <form method="post" class="mt-2" enctype="multipart/form-data">
+            <div style="display:none">
+                <label>Key:</label><br />
+                <input asp-for="Key" class="form-control" /><br />
+                <span classs="text-danger" asp-validation-for="Key"></span>
+            </div>
+            <div>
+                <label>Value:</label><br />
+                <input asp-for="Value" class="form-control" /><br />
+                <span classs="text-danger" asp-validation-for="Value"></span>
+            </div>
+            @* <div>
+            <label>Discount:</label><br />
+            <input asp-for="Discount" type="text" class="form-control" /><br />
+            <span class="text-danger" asp-validation-for="Discount"></span>
+            </div>*@
+            <div class="mt-2" style="text-align:center">
+                <button style="width: 10rem;" class="btn btn-success" type="submit">
+                    Update
+                </button>
+            </div>
+        </form>
+</main>
+
+

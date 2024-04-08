@@ -1,0 +1,54 @@
+﻿@if (Model.Comments != null)
+{
+
+
+   
+       @foreach (Comment comment in Model.Comments)
+          {
+
+        <div style="margin:2rem ;display:flex;" class="media-body commentdiv">
+            <div>
+                <h6>@comment.AppUser.FirstName<small> - <i>@comment.Date</i></small></h6>
+                <div>
+                    <p>@comment.Text</p>
+                </div>
+            </div>
+    
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                @if (User.Identity.Name == comment.AppUser.UserName || User.IsInRole("Admin"))
+                {
+              
+
+                        <a data-id="@comment.Id" data-medid="@Model.Id" class="removecomment"><i class="far fa-times-circle" style="font-size:15px; cursor:pointer; margin-left:2rem;"></i></a>
+                    
+                }
+            }
+        </div>
+      
+    }
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+
+    $(function () {
+        $(".commentdiv").on("click", ".removecomment", function () {
+            var btn = $(this);
+            var id = btn.data("id");
+            var medid = btn.data("medid");
+           
+            $.ajax({
+                type: "GET",
+                url: "/Furniture/Deletecomment/" + id,
+
+                success: function () {
+                    btn.parent().remove();
+                    replies.remove();
+                }
+            });
+        });
+
+
+    });
+</script>
